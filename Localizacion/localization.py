@@ -2,6 +2,7 @@ from controllerDriver import ControllerWindow
 from selenium.webdriver.common.by import By
 import time
 from selenium.webdriver.common.action_chains import ActionChains  # Importar ActionChains
+import pandas as pd
 
 class Localization:
 
@@ -60,6 +61,8 @@ class Localization:
     def tearDown(self):
         self.driver.quit()
 
+#Se lee el csv
+station_df = pd.read_csv('C:\\Users\\alejo\\OneDrive\\Documentos\\Proyectos Selenium\\Localizacion\\weather_stations_data.csv')
 station_row = {
     'ID':'ACW00011604',   
     'Station Name':'SAVE',
@@ -73,6 +76,11 @@ station_row = {
     'Precipitation': 0,
     'Radiation': 0
 }
+
+
 localization = Localization('http://courses.academti.com/chatbot/weather-stations/add')
 localization.star()
-localization.insertData(station_row)
+#accediendo a fila por fila
+for i in range(0,3):
+    station_row = station_df.iloc[i]
+    localization.insertData(station_row)
