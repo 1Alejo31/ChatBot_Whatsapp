@@ -50,7 +50,9 @@ class Localization:
         time.sleep(2)
         
         self.controller.driver.find_element(By.TAG_NAME, 'form').submit()
-        time.sleep(5)
+        
+        #implicit wait
+        self.controller.driver.implicitly_wait(5)
         
         #Buscar de manera parcial en un objeto el texto
         self.controller.driver.find_element(By.LINK_TEXT, 'Descargar archivo').click()
